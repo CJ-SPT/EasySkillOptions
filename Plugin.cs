@@ -1,6 +1,4 @@
-﻿using Aki.Reflection.Utils;
-using BepInEx;
-using BepInEx.Configuration;
+﻿using BepInEx;
 using Comfort.Common;
 using DrakiaXYZ.VersionChecker;
 using EasySkillOptions.Core;
@@ -10,10 +8,10 @@ using System;
 
 namespace EasySkillOptions
 {
-    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.0")]
+    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.1")]
     internal class Plugin : BaseUnityPlugin
     {
-        public const int TarkovVersion = 29197;
+        public const int TarkovVersion = 30626;
 
         internal static Plugin Instance;
         internal static BackendConfigSettingsClass BackendConfig;

@@ -1,7 +1,7 @@
-﻿using Aki.Reflection.Patching;
-using EFT;
+﻿using EFT;
 using System.Reflection;
 using Comfort.Common;
+using SPT.Reflection.Patching;
 
 namespace EasySkillOptions.Patches
 {
