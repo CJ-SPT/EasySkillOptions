@@ -4,81 +4,71 @@ namespace EasySkillOptions.Core
 {
     internal static class LevelingOptions
     {
-        public static ConfigEntry<bool> enableAdvancedLevelingMod;
-        public static ConfigEntry<float> freshSkillPoints;
-        public static ConfigEntry<float> skillPointsBeforeFatique;
-        public static ConfigEntry<float> skillPointsResetTime;
-        public static ConfigEntry<float> skillPointsFreshEffectivness;
-        public static ConfigEntry<float> skillFatiquePerPoint;
-        public static ConfigEntry<float> skillMinEffectiveness;
-        public static ConfigEntry<float> skillProgressRate;
-        public static ConfigEntry<bool> enableAtrophy;
+        private static ConfigEntry<float> freshSkillPoints;
+        private static ConfigEntry<float> skillPointsBeforeFatique;
+        private static ConfigEntry<float> skillPointsResetTime;
+        private static ConfigEntry<float> skillPointsFreshEffectivness;
+        private static ConfigEntry<float> skillFatiquePerPoint;
+        private static ConfigEntry<float> skillMinEffectiveness;
+        private static ConfigEntry<float> skillProgressRate;
+        private static ConfigEntry<bool> enableAtrophy;
 
-        public static void RegisterConfig(ConfigFile Config)
+        public static void RegisterConfig(ConfigFile config)
         {
-            //string mainLevelingMods = "Simple Leveling Modifier";
-            string advancedLevelingMods = "Advanced Leveling Modifiers";
-         
-            enableAdvancedLevelingMod = Config.Bind(
-               advancedLevelingMods,
-               "Enable advanced leveling config",
-               false,
-               "Enables the advanced leveling configs. if enabled disables the simple leveling modifier");
-
-            freshSkillPoints = Config.Bind(
+            var advancedLevelingMods = "Leveling Modifiers";
+            
+            freshSkillPoints = config.Bind(
                advancedLevelingMods,
                "Fresh skill points",
                1f,
                new ConfigDescription("Amount of fresh skill points you have", new AcceptableValueRange<float>(1, 100)));
 
-            skillPointsBeforeFatique = Config.Bind(
+            skillPointsBeforeFatique = config.Bind(
                advancedLevelingMods,
-               "skill points before fatique",
+               "skill points before fatigue",
                2f,
-               new ConfigDescription("Amount of fresh skill points before skill fatique kicks in", new AcceptableValueRange<float>(1, 100)));
+               new ConfigDescription("Amount of fresh skill points before skill fatigue kicks in", new AcceptableValueRange<float>(1, 100)));
 
-            skillPointsResetTime = Config.Bind(
+            skillPointsResetTime = config.Bind(
                advancedLevelingMods,
                "skill point fatique reset time",
                300f,
-               new ConfigDescription("Amount of time in seconds before fatique resets", new AcceptableValueRange<float>(1, 1000)));
+               new ConfigDescription("Amount of time in seconds before fatigue resets", new AcceptableValueRange<float>(1, 1000)));
 
-            skillPointsFreshEffectivness = Config.Bind(
+            skillPointsFreshEffectivness = config.Bind(
                advancedLevelingMods,
                "Fresh skill point multiplier",
                1.2f,
                new ConfigDescription("Multiplies the points per action of fresh points", new AcceptableValueRange<float>(1, 10)));
 
-            skillFatiquePerPoint = Config.Bind(
+            skillFatiquePerPoint = config.Bind(
                advancedLevelingMods,
                "Skill fatique per point",
                0.5f,
-               new ConfigDescription("How much fatique is accumulated per skill point gained", new AcceptableValueRange<float>(0, 10)));
+               new ConfigDescription("How much fatigue is accumulated per skill point gained", new AcceptableValueRange<float>(0, 10)));
 
-            skillMinEffectiveness = Config.Bind(
+            skillMinEffectiveness = config.Bind(
                advancedLevelingMods,
                "Min skill effectiveness",
                0.01f,
                new ConfigDescription("minimum skill point gained per action", new AcceptableValueRange<float>(0, 10)));
 
-            skillProgressRate = Config.Bind(
+            skillProgressRate = config.Bind(
                advancedLevelingMods,
                "Skill progress rate",
                0.4f,
                new ConfigDescription("How often actions can occur", new AcceptableValueRange<float>(0, 10)));
 
-            enableAtrophy = Config.Bind(
+            enableAtrophy = config.Bind(
                advancedLevelingMods,
                "Enable skill atrophy(regression)",
                true,
                "Enables the roll back of skills");
         }
 
-        public static void SetadvancedLeveling()
+        public static void SetAdvancedLeveling()
         {
-            // If the backend is null
-            // or the mod is not enabled, return early
-            if (Plugin.BackendConfig == null || !enableAdvancedLevelingMod.Value)
+            if (Plugin.BackendConfig == null)
             {
                 return;
             }
@@ -144,12 +134,12 @@ namespace EasySkillOptions.Core
                 Plugin.BackendConfig.SkillsSettings.SkillProgressRate = skillProgressRate.Value;
             }
 
-            if (enableAtrophy.Value && Plugin.BackendConfig.SkillAtrophy == false)
+            if (enableAtrophy.Value && !Plugin.BackendConfig.SkillAtrophy)
             {
                 Plugin.BackendConfig.SkillAtrophy = true;
 
             }
-            else if (!enableAtrophy.Value && Plugin.BackendConfig.SkillAtrophy == true)
+            else if (!enableAtrophy.Value && Plugin.BackendConfig.SkillAtrophy)
             {
                 Plugin.BackendConfig.SkillAtrophy = false;
             }

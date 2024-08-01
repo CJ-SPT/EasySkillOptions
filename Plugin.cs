@@ -8,7 +8,7 @@ using System;
 
 namespace EasySkillOptions
 {
-    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.1")]
+    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.2")]
     internal class Plugin : BaseUnityPlugin
     {
         public const int TarkovVersion = 30626;
@@ -40,7 +40,7 @@ namespace EasySkillOptions
             if (Singleton<GameWorld>.Instantiated && BackendConfig != null && SkillManager != null)
             {
                 EliteSkillToggles.SetToggles();
-                LevelingOptions.SetadvancedLeveling();
+                LevelingOptions.SetAdvancedLeveling();
             }
             else
             {
