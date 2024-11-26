@@ -8,10 +8,10 @@ using System;
 
 namespace EasySkillOptions
 {
-    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.2")]
+    [BepInPlugin("com.dirtbikercj.EasySkillOptions", "Easy Skill Options", "2.1.3")]
     internal class Plugin : BaseUnityPlugin
     {
-        public const int TarkovVersion = 30626;
+        public const int TarkovVersion = 33420;
 
         internal static Plugin Instance;
         internal static BackendConfigSettingsClass BackendConfig;
